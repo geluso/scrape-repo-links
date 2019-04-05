@@ -3,12 +3,13 @@ links = Array.prototype.slice.call(links)
 links = links.filter(link => link.href.includes('github'))
 links = links.map(link => link.href)
 
-links.forEach((href, index) => {
+let clone_commands = links.map((href, index) => {
   index = prefixIndex(index, links.length)
   cells = href.split('/')
   name = cells[cells.length - 1]
-  console.log(`git clone ${href} ${index}-${name}`)
+  return `git clone ${href} ${index}-${name}`
 })
+console.log(JSON.stringify(clone_commands.join('; ')))
 
 function prefixIndex(index, total) {
   if (total < 10) {
@@ -28,4 +29,3 @@ function prefixIndex(index, total) {
     return index
   }
 }
-
